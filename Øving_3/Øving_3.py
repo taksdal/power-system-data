@@ -47,14 +47,17 @@ plt.show()
 monthly.to_csv('/Users/olekristiantaksdal/repos/power-system-data/Results/resultater.csv')
 
 #Finner max og min
-hoyest_last = max(alle_verdier)
-lavest_last = min(alle_verdier)
+#hoyest_last = max(alle_verdier)
+#lavest_last = min(alle_verdier)
 
-#Finner standardavvik
+#Finner standardavvik og max og min
 std = df['Actual Load'].resample('1M').std()
+hoyest_last = df['Actual Load'].resample('1M').max()
+lavest_last = df['Actual Load'].resample('1M').min()
 
-
-print('Max-verdi:', hoyest_last)
-print('Min-verdi:', lavest_last)
-print('Standardavvik for hver måned:')
-print(std)
+info = pd.DataFrame({"Høyest last":hoyest_last, "Lavest last":lavest_last, "Standardavvik":std})
+info.to_csv('/Users/olekristiantaksdal/repos/power-system-data/Results/statistikk.csv')
+#print('Max-verdi:', hoyest_last)
+#print('Min-verdi:', lavest_last)
+#print('Standardavvik for hver måned:')
+#print(std)
