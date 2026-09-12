@@ -41,7 +41,7 @@ model_load = (
 
 x = range(len(dogn_profil.index))
 
-#Figur for et døgn
+#Figur for et døgn, observert og modell
 plt.figure(figsize=(10,5))
 
 plt.plot(x,
@@ -56,7 +56,100 @@ plt.plot(x,
     marker = "o"
 )
 
-plt.title("Produksjon og forbruk")
+plt.title("Forbruk, observert og modell")
+plt.xlabel("Timer")
+plt.xticks(x)
+plt.ylabel("Effekt [MW]")
+plt.grid(True)
+plt.legend()
+plt.show()
+
+#Figur for et døgn, observert
+plt.figure(figsize=(10,5))
+
+plt.plot(x,
+    dogn_profil["Consumption"],
+    label="Consumption",
+    marker='o'
+)
+
+plt.title("Forbruk observert")
+plt.xlabel("Timer")
+plt.xticks(x)
+plt.ylabel("Effekt [MW]")
+plt.grid(True)
+plt.legend()
+plt.show()
+
+plt.figure(figsize=(10,5))
+
+plt.plot(x,
+    model_load,
+    label="Modell",
+    marker = "o",
+    color= "orange",
+)
+
+plt.plot(x,
+    night_decline + base_load,
+    label = "Night decline",
+    linestyle = ":"
+)
+
+plt.plot(x,
+    morning_peak + base_load,
+    label = "Morning peak",
+    linestyle = ":"
+)
+
+plt.plot(x,
+    evening_peak + base_load,
+    label = "Evening peak",
+    linestyle = ":"
+)
+
+plt.title("Forbruk, modell")
+plt.xlabel("Timer")
+plt.xticks(x)
+plt.ylabel("Effekt [MW]")
+plt.grid(True)
+plt.legend()
+plt.show()
+
+plt.figure(figsize=(10,5))
+
+plt.plot(x,
+    dogn_profil["Consumption"],
+    label="Consumption",
+    marker='o'
+)
+
+plt.plot(x,
+    model_load,
+    label="Modell",
+    marker = "o",
+    color= "orange",
+)
+
+plt.plot(x,
+    night_decline + base_load,
+    label = "Night decline",
+    linestyle = ":"
+)
+
+plt.plot(x,
+    morning_peak + base_load,
+    label = "Morning peak",
+    linestyle = ":"
+)
+
+plt.plot(x,
+    evening_peak + base_load,
+    label = "Evening peak",
+    linestyle = ":"
+)
+
+plt.title("Forbruk, modell")
 plt.xlabel("Timer")
 plt.xticks(x)
 plt.ylabel("Effekt [MW]")
