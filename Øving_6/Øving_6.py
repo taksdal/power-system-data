@@ -80,6 +80,7 @@ plt.ylabel("Innstråling [W/m²]")
 plt.xticks(x)
 plt.legend()
 plt.grid()
+plt.savefig("/Users/olekristiantaksdal/repos/power-system-data/Øving_6/fig_modell")
 plt.show()
 
 # Plotting av hele året
@@ -91,6 +92,7 @@ plt.xlabel("Tid [timer]")
 plt.ylabel("Innstråling [W/m²]")
 plt.legend()
 plt.grid()
+plt.savefig("/Users/olekristiantaksdal/repos/power-system-data/Øving_6/fig_år")
 plt.show()
 
 # Plotting av juni måned
@@ -102,6 +104,7 @@ plt.xlabel("Tid [timer]")
 plt.ylabel("Innstråling [W/m²]")
 plt.legend()
 plt.grid()
+plt.savefig("/Users/olekristiantaksdal/repos/power-system-data/Øving_6/fig_juni")
 plt.show()
 
 # Plotting av dag med optimized slope og azimiuth
@@ -120,6 +123,7 @@ plt.ylabel("Innstråling [W/m²]")
 plt.xticks(x)
 plt.legend()
 plt.grid()
+plt.savefig("/Users/olekristiantaksdal/repos/power-system-data/Øving_6/fig_sammenligning")
 plt.show()
 
 # Plotting av Gauss og data i samme fig
@@ -137,4 +141,5 @@ plt.ylabel("Innstråling [W/m²]")
 plt.xticks(x)
 plt.legend()
 plt.grid()
+plt.savefig("/Users/olekristiantaksdal/repos/power-system-data/Øving_6/fig_gauss_og_data")
 plt.show()
