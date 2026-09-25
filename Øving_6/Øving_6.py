@@ -52,7 +52,7 @@ dag = df.loc['2022-06-05']
 dag2 = df2.loc['2022-06-05']
 month = df2.loc['2022-06']
 
-t = np.linspace(0, 24, 500)
+t = np.linspace(0, 23, 500)
 t2 = np.linspace(0, 23, 24)
 
 A = 800
@@ -60,8 +60,13 @@ mu = 13
 sigma = 3
 sigma_okt = 4
 
+A3 = 1100
+mu3 = 14
+sigma_3 = 3
+
 G = A * np.exp(-(t - mu)**2 / (2 * sigma**2))
 G2 = A *np.exp(-(t-mu)**2 / (2 * sigma_okt**2))
+G3 = A3 *np.exp(-(t-mu3)**2 / (2 * sigma_3**2))
 
 x = range(len(dag.index))
 x2 = range(len(dag2.index))
@@ -72,6 +77,7 @@ plt.plot(t, G, label="Kurve 1")
 plt.plot(t, G2, label="Kurve 2")
 plt.xlabel("Tid [timer]")
 plt.ylabel("Innstråling [W/m²]")
+plt.xticks(x)
 plt.legend()
 plt.grid()
 plt.show()
@@ -111,6 +117,24 @@ plt.plot(x,
 )
 plt.xlabel("Tid [timer]")
 plt.ylabel("Innstråling [W/m²]")
+plt.xticks(x)
+plt.legend()
+plt.grid()
+plt.show()
+
+# Plotting av Gauss og data i samme fig
+plt.plot(x2,
+    dag2["G(i)"],
+    label = "innstråling",
+    marker = "o",
+)
+plt.plot(t,
+    G3,
+    label = "Gauss-modell"
+)
+plt.xlabel("Tid [timer]")
+plt.ylabel("Innstråling [W/m²]")
+plt.xticks(x)
 plt.legend()
 plt.grid()
 plt.show()
