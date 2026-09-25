@@ -22,15 +22,26 @@ df = df.tz_convert("Europe/Oslo")
 
 
 dogn_profil = df.loc["2026-03-03"]
+dogn_profil_januar = df.loc["2026-01-15"]
 
 t = np.linspace(0, 23, 24)
 
 #Setter base load til å være på starten av dagen
+# base_load = dogn_profil["Consumption"].iloc[0]
+# night = df.loc[f"{dogn_profil} 00:00":f"{dogn_profil} 05:00", "Consumption"]
+# morning =  df.loc[f"{dogn_profil} 00:50":f"{dogn_profil} 10:00", "Consumption"]
+# evening =  df.loc[f"{dogn_profil} 10:00":f"{dogn_profil} 23:00", "Consumption"]
+#print(f"Baseload = {base_load}")
 base_load = 17000
+bl_jan = 20000
 
 morning_peak = 2100 * np.exp(-0.5*((t-8)/2)**2)
 evening_peak = 1800 * np.exp(-0.5*((t-19)/4.5)**2)
 night_decline =  -800 * np.exp(-0.5*((t-4)/2)**2)
+
+nd_jan = -1000 * np.exp(-0.5*((t-4)/2)**2)
+mp_jan = 2500 * np.exp(-0.5*((t-8)/2)**2)
+ep_jan = 2500 * np.exp(-0.5*((t-19)/4.5)**2)
 
 model_load = (
     base_load
@@ -39,6 +50,12 @@ model_load = (
     + evening_peak
 )
 
+mod_jan = (
+    bl_jan
+    + nd_jan
+    + mp_jan
+    + ep_jan
+)
 x = range(len(dogn_profil.index))
 
 #Figur for et døgn, observert og modell
@@ -159,4 +176,26 @@ plt.ylabel("Effekt [MW]")
 plt.grid(True)
 plt.legend()
 plt.savefig("/Users/olekristiantaksdal/repos/power-system-data/Øving_5/obs_med_full_modell")
+plt.show()
+
+plt.figure(figsize = (10, 5))
+
+plt.plot(x,
+    dogn_profil_januar["Consumption"],
+    marker = "o",
+    label = "Januar profil"
+)
+
+plt.plot(x,
+    mod_jan,
+    marker = "o",
+    label = "Januar modell"
+)
+plt.title("Januar forbruk")
+plt.xlabel("Timer")
+plt.xticks(x)
+plt.ylabel("Effekt [MW]")
+plt.grid(True)
+plt.legend()
+plt.savefig("/Users/olekristiantaksdal/repos/power-system-data/Øving_5/januar_modell")
 plt.show()
